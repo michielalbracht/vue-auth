@@ -111,6 +111,21 @@ export function createAuthStore({
       return data
     }
 
+    // Magic-link: vraag een eenmalige inloglink aan (anti-enumeratie: altijd ok).
+    async function vraagMagicLinkAan(email) {
+      await prepareWrite()
+      const { data } = await api.post('/magic-link', { email })
+      return data
+    }
+
+    // Magic-link: verzilver de token uit de e-maillink en log in.
+    async function loginMetMagicLink(payload) {
+      await prepareWrite()
+      const { data } = await api.post('/magic-link/login', payload)
+      _setAuth(data)
+      return data
+    }
+
     async function logout() {
       try {
         await prepareWrite()
@@ -156,8 +171,8 @@ export function createAuthStore({
     const base = {
       user, token, loading, preferences,
       isIngelogd, isGeverifieerd, isPro, isAdmin,
-      register, login, loginMetPasskey, logout, fetchMe,
-      updateProfiel, uploadAvatar, updatePreferences,
+      register, login, loginMetPasskey, vraagMagicLinkAan, loginMetMagicLink,
+      logout, fetchMe, updateProfiel, uploadAvatar, updatePreferences,
       _setAuth, _clearAuth,
     }
 
