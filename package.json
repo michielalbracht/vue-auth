@@ -1,0 +1,26 @@
+{
+  "name": "@albrachtsystems/vue-auth",
+  "version": "1.0.0",
+  "description": "Herbruikbare Vue 3 + Pinia authenticatielaag: store-factory, API-client, token-opslag en passkey-helpers.",
+  "type": "module",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./create-auth-store": "./src/createAuthStore.js",
+    "./create-api-client": "./src/createApiClient.js",
+    "./create-token-storage": "./src/createTokenStorage.js",
+    "./create-passkey-api": "./src/createPasskeyApi.js"
+  },
+  "files": [
+    "src"
+  ],
+  "peerDependencies": {
+    "@simplewebauthn/browser": "*",
+    "axios": "^1",
+    "pinia": "^3",
+    "vue": "^3"
+  }
+}
